@@ -39,7 +39,6 @@ const Home = () => {
       <BrandName />
       <Navbar />
       <UserCircle />
-      <ConstellationBackground />
 
       <div className='flex flex-col md:flex-row bg-gradient-to-b from-purple-300 via-purple-300 to-white md:pt-20 lg:pt-0'>
         <div className="box w-[100%] md:w-[50%] flex items-center justify-center">

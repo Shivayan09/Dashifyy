@@ -12,7 +12,7 @@ const ConfirmDelete = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 transition-all duration-300 ease-in-out bg-white/5 bg-opacity-100 flex items-center justify-center z-50">
+    <div className="fixed inset-0 transition-all duration-300 ease-in-out bg-opacity-100 flex items-center justify-center z-50">
       <div className="bg-white transition-all duration-300 ease-in-out p-6 rounded-2xl border border-purple-200 max-w-sm w-[80%]">
         <h2 className="text-[1.2rem] font-bold text-purple-900/80 mb-2">{title}</h2>
         <p className="text-[0.9rem] text-purple-900/70 my-5">{message}</p>

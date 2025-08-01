@@ -61,7 +61,7 @@ const Sidebar = () => {
         {menuItems.map(({ id, label, icon, path }) => (
           <div
             key={id}
-            className={`box h-12 flex gap-2 rounded-xl cursor-pointer items-center px-3 transition-colors duration-200 ${active === id ? 'bg-purple-900/60' : ''}`}
+            className={`box h-12 flex gap-2 rounded-xl cursor-pointer items-center px-3 transition-colors duration-200 ${active === id ? 'bg-purple-900/50' : ''}`}
             onClick={() => handleClick(id, path)}
           >
             {typeof icon === 'string' ? (
@@ -99,7 +99,7 @@ const Sidebar = () => {
       )}
 
       {!isMobile && (
-        <div className="fixed z-40 top-0 left-0 h-screen w-1/5 p-6 bg-purple-900/80">
+        <div className="fixed z-50 top-0 left-0 h-screen w-1/5 p-6 bg-purple-900/85">
           {renderSidebarContent()}
         </div>
       )}

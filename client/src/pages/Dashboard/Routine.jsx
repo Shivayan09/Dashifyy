@@ -9,6 +9,7 @@ import calendar_icon from '../../assets/calendar-icon.png';
 import ConfirmDelete from '../../components/ConfirmDelete';
 import { useNavigate } from 'react-router-dom';
 import DayDropdown from '../../components/DayDropdown';
+import no_data_icon from '../../assets/no-data-icon.png'
 
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -158,15 +159,15 @@ const Routine = () => {
         )}
       </div>
 
-      <div className='input box mb-6 flex items-center gap-3'>
-        <div className="inputs flex flex-col md:flex-row gap-3 md:gap-4">
+      <div className='input box mb-6 flex flex-col md:flex-row items-center gap-3'>
+        <div className="inputs flex items-center w-full flex-col md:flex-row gap-3 md:gap-4">
           <DayDropdown selectedDay={selectedDay} setSelectedDay={setSelectedDay}/>
           <input
             value={formInputs[selectedDay]?.subject || ''}
             onChange={(e) => handleInputChange(selectedDay, 'subject', e.target.value)}
             type="text"
             maxLength={25}
-            className='h-10 w-[20%] rounded-lg bg-white border border-purple-900 text-purple-900 outline-none p-3'
+            className='h-10 w-[100%] md:w-[20%] rounded-lg bg-white border border-purple-900 text-purple-900 outline-none p-3'
             placeholder='Subject'
           />
           <input
@@ -175,7 +176,7 @@ const Routine = () => {
             type="number"
             max={12}
             min={1}
-            className='h-10 w-[20%] rounded-lg bg-white border border-purple-900 text-purple-900 outline-none p-3'
+            className='h-10 w-[100%] md:w-[20%] rounded-lg bg-white border border-purple-900 text-purple-900 outline-none p-3'
             placeholder='Start time'
           />
           <input
@@ -184,19 +185,19 @@ const Routine = () => {
             type="number"
             max={12}
             min={1}
-            className='h-10 w-[20%] rounded-lg bg-white border border-purple-900 text-purple-900 outline-none p-3'
+            className='h-10 w-[100%] md:w-[20%] rounded-lg bg-white border border-purple-900 text-purple-900 outline-none p-3'
             placeholder='End time'
           />
           <input
             value={formInputs[selectedDay]?.location || ''}
             onChange={(e) => handleInputChange(selectedDay, 'location', e.target.value)}
             type="text"
-            className='h-10 w-[20%] rounded-lg bg-white border border-purple-900 text-purple-900 outline-none p-3'
+            className='h-10 w-[100%] md:w-[20%] rounded-lg bg-white border border-purple-900 text-purple-900 outline-none p-3'
             placeholder='Location'
           />
         </div>
         <button
-          className='bg-white border border-purple-700 cursor-pointer flex items-center justify-center h-10 w-12 rounded-lg text-purple-900 hover:shadow-xl'
+          className='border border-purple-700 bg-purple-100 cursor-pointer flex items-center justify-center h-10 w-10 rounded-md text-purple-900 hover:shadow-xl'
           onClick={() => handleAddRoutine(selectedDay)}
         >
           <Plus className='h-6 w-6 opacity-70' />
@@ -210,14 +211,17 @@ const Routine = () => {
         </h2>
 
         {routinesByDay[selectedDay]?.length === 0 ? (
-          <p className="text-gray-400 italic mt-5 text-[1.1rem]">No routines added yet for {selectedDay}</p>
+          <div className='flex items-center justify-center flex-col'>
+            <p className="text-gray-400 italic mt-5 text-[1.1rem]">No routines added yet for {selectedDay}</p>
+            <img src={no_data_icon} alt="" className='h-[45vh] md:h-[70vh] -mt-14'/>
+          </div>
         ) : (
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 mb-5 md:mb-0">
             {routinesByDay[selectedDay].map(routine => (
               <div key={routine._id} className="rounded-xl bg-purple-50/70 px-5 py-2 shadow-sm hover:shadow-md flex flex-col md:flex-row items-center justify-between">
-                <div className="flex flex-col md:flex-row items-center gap-4 md:gap-10 w-full">
+                <div className="flex flex-col md:flex-row gap-4 md:gap-10 w-full">
 
-                  <div className="flex items-center gap-2 w-[36%]">
+                  <div className="flex items-center gap-2 w-[100%] md:w-[36%]">
                     <BookOpen className="w-5 h-5 text-purple-900 opacity-60" />
                     {editRoutineId === routine._id ? (
                       <input value={editSubject} onChange={(e) => setEditSubject(e.target.value)} className="border p-1 rounded-md w-full border-purple-700 text-purple-900" />
@@ -226,7 +230,7 @@ const Routine = () => {
                     )}
                   </div>
 
-                  <div className="flex items-center gap-2 w-[20%]">
+                  <div className="flex items-center gap-2 w-[100%] md:w-[20%]">
                     <Clock className="w-5 h-5 text-purple-900 opacity-60" />
                     {editRoutineId === routine._id ? (
                       <div className="flex gap-2">
@@ -238,7 +242,7 @@ const Routine = () => {
                     )}
                   </div>
 
-                  <div className="flex items-center gap-2 w-[20%]">
+                  <div className="flex items-center gap-2 w-[100%] md:w-[20%]">
                     <MapPin className="w-5 h-5 text-purple-900 opacity-60" />
                     {editRoutineId === routine._id ? (
                       <input value={editLocation} onChange={(e) => setEditLocation(e.target.value)} className="border p-1 w-24 rounded-md border-purple-700 text-purple-900" />

@@ -6,7 +6,6 @@ import { Outlet } from 'react-router-dom'
 const DashboardLayout = () => {
   return (
     <div className='flex'>
-        <ConstellationBackground/>
         <div className="sidebar md:w-1/5">
           <Sidebar/>
         </div>
