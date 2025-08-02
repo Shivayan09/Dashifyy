@@ -1,7 +1,7 @@
 import taskModel from "../models/taskModel"
 
 export const addTask = async(req, res) => {
-    const {task} = req.body
+    const {task, userId} = req.body
     if(!task) {
         return res.json({
             success: false,
@@ -9,14 +9,14 @@ export const addTask = async(req, res) => {
         })
     }
     try {
-        const existingTask = await taskModel.findOne({task})
+        const existingTask = await taskModel.findOne({task, userId})
         if(existingTask) {
             return res.json({
                 success: false,
                 message: "Task already exists!"
             })
         }
-        const newTask = new taskModel({task})
+        const newTask = new taskModel({task, userId})
         await newTask.save();
         return res.status(200).json({
             success: true,
@@ -28,4 +28,9 @@ export const addTask = async(req, res) => {
             message: error.message
         })
     }
+}
+
+export const deleteTask = async(req, res) => {
+    const {task} = req.body;
+
 }
