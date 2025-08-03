@@ -30,6 +30,28 @@ export const addTask = async(req, res) => {
     }
 }
 
+export const getTasks = async(req, res) => {
+    const {userId} = req.body;
+    try {
+        const tasks = await taskModel.find({userId})
+        if(!tasks) {
+            return res.json({
+                success: false,
+                message: "Task not found"
+            })
+        }
+        return res.status(200).json({
+            success: false,
+            tasks
+        })
+    } catch(error) {
+        return res.status(400).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
 export const deleteTask = async(req, res) => {
     const {id} = req.params
     if(!id) {
