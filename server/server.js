@@ -7,6 +7,7 @@ import userRouter from './routes/userRoute.js';
 import cors from 'cors';
 import subjectRouter from './routes/subjectRoutes.js';
 import routineRouter from './routes/routineRoutes.js';
+import taskRouter from './routes/taskRoutes.js';
 
 const app = express()
 
@@ -40,6 +41,7 @@ app.use('/api/auth', authRouter)
 app.use('/api/user', userRouter)
 app.use('/api/subject', subjectRouter)
 app.use('/api/routine', routineRouter)
+app.use('/api/task', taskRouter)
 
 app.listen(port, () => {
     console.log("App running on port", port)

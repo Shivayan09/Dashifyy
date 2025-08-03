@@ -1,4 +1,4 @@
-import taskModel from "../models/taskModel"
+import taskModel from "../models/taskModel.js"
 
 export const addTask = async(req, res) => {
     const {task, userId} = req.body
