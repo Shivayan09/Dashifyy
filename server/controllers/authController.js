@@ -102,7 +102,7 @@ export const login = async (req, res) => {
             message: "Logged In successfully"
         })
     } catch (error) {
-        return res.status(200).json({
+        return res.status(400).json({
             success: false,
             message: error.message
         })
