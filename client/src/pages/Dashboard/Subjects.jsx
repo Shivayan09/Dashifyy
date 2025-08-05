@@ -28,20 +28,20 @@ const Subjects = () => {
       return {
         label: 'Low Importance',
         color: 'text-white',
-        bgColor: 'bg-green-300'
+        bgColor: 'bg-green-400/80'
       };
     }
     if (credit <= 3) {
       return {
         label: 'Med Importance',
         color: 'text-white',
-        bgColor: 'bg-yellow-200'
+        bgColor: 'bg-yellow-400/80'
       };
     }
     return {
       label: 'High Importance',
       color: 'text-white',
-      bgColor: 'bg-red-300'
+      bgColor: 'bg-red-400/80'
     };
   };
 
@@ -159,7 +159,7 @@ const Subjects = () => {
         <div className="search flex items-center justify-center gap-3 w-full md:w-[70%] mt-3 md:mt-0">
           <input type="text" placeholder='Search a subject' className='h-9 md:h-10 w-[72%] text-purple-900 bg-gray-200/80 rounded-xl p-3 outline-none'
             onChange={(e) => setSearch(e.target.value)} />
-          <button className='h-9 md:h-10 w-20 md:w-32 transition-all hover:shadow-md bg-purple-900/70 rounded-xl cursor-pointer text-white'>Search</button>
+          <button className='h-9 md:h-10 w-20 md:w-32 transition-all hover:shadow-md bg-purple-900/75 rounded-xl cursor-pointer text-white'>Search</button>
         </div>
         {!isMobile &&
           <button className='cursor-pointer transition-all duration-300 hover:scale-[1.02]' onClick={() => navigate('/')}>
