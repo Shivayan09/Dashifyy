@@ -1,9 +1,10 @@
-import { CheckCheck, LeafyGreen, Plus } from 'lucide-react'
+import { CheckCheck, Delete, DeleteIcon, LeafyGreen, Pencil, Plus } from 'lucide-react'
 import React, { useContext, useEffect, useState } from 'react'
 import home_icon from '../../assets/home-icon.png'
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { AppContext } from '../../context/AppContext';
+import delete_icon from '../../assets/delete-icon.png'
 
 const ToDo = () => {
 
@@ -71,7 +72,7 @@ const ToDo = () => {
       </div>
       <div className="box h-[70vh] w-[100%] flex items-center justify-center mx-auto mb-7">
         <div className="display shadow-md w-[70%] h-[60vh] rounded-3xl my-7 overflow-hidden">
-          <div className="top h-8 bg-purple-800/50 flex items-center gap-2 pl-3">
+          <div className="top h-8 bg-purple-800/70 flex items-center gap-2 pl-3">
             <div className="circle h-4 w-4 bg-red-400 rounded-full"></div>
             <div className="circle h-4 w-4 bg-yellow-400 rounded-full"></div>
             <div className="circle h-4 w-4 bg-green-400 rounded-full"></div>
@@ -81,7 +82,17 @@ const ToDo = () => {
             :
             (tasks.map((task, index) => (
               <div key={task._id}>
-                <p>{task.task}</p>
+                <div className='border-b border-purple-200 h-14 flex items-center mx-5 justify-between'>
+                  <p className='font-semibold text-purple-900/70 text-[1.15rem]'><span className='mx-2'>{index+1}.</span>{task.task}</p>
+                  <div className="buttons flex gap-2">
+                    <button className='h-7 border w-14 flex items-center justify-center rounded-md border-purple-300 bg-purple-50 transition-all duration-300 hover:scale-[1.02] hover:bg-purple-100 cursor-pointer'>
+                      <Pencil className='text-purple-900 h-4 opacity-70'></Pencil>
+                    </button>
+                    <button className='h-7 border w-14 flex items-center justify-center rounded-md border-purple-300 bg-purple-50 transition-all duration-300 hover:scale-[1.02] hover:bg-purple-100 cursor-pointer'>
+                      <img src={delete_icon} alt="" className='h-7 opacity-60'/>
+                    </button>
+                  </div>
+                </div>
               </div>
             )))
             }
