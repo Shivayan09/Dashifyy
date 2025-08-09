@@ -52,6 +52,35 @@ export const getTasks = async(req, res) => {
     }
 }
 
+export const editTask = async(req, res) => {
+    const taskId = req.params.id
+    const {task} = req.body
+    if(!task) {
+        return res.json({
+            success: false,
+            message: "Enter a task!"
+        })
+    }
+    try {
+        const updated = await taskModel.findByIdAndUpdate(taskId, {task}, {new: true})
+        if(!updated) {
+            return res.json({
+                success: false,
+                message: "Couldn't update task"
+            })
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Task updated successfully!"
+        })
+    } catch(error) {
+        return res.status(400).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
 export const deleteTask = async(req, res) => {
     const {id} = req.params
     if(!id) {
