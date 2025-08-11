@@ -1,28 +1,28 @@
 import taskModel from "../models/taskModel.js"
 
-export const addTask = async(req, res) => {
-    const {task, userId} = req.body
-    if(!task) {
+export const addTask = async (req, res) => {
+    const { task, userId } = req.body
+    if (!task) {
         return res.json({
             success: false,
             message: "Task name is required"
         })
     }
     try {
-        const existingTask = await taskModel.findOne({task, userId})
-        if(existingTask) {
+        const existingTask = await taskModel.findOne({ task, userId })
+        if (existingTask) {
             return res.json({
                 success: false,
                 message: "Task already exists!"
             })
         }
-        const newTask = new taskModel({task, userId})
+        const newTask = new taskModel({ task, userId })
         await newTask.save();
         return res.status(200).json({
             success: true,
             message: "Task added successfully!"
         })
-    } catch(error) {
+    } catch (error) {
         return res.status(400).json({
             success: false,
             message: error.message
@@ -30,11 +30,11 @@ export const addTask = async(req, res) => {
     }
 }
 
-export const getTasks = async(req, res) => {
-    const {userId} = req.body;
+export const getTasks = async (req, res) => {
+    const { userId } = req.body;
     try {
-        const tasks = await taskModel.find({userId})
-        if(!tasks) {
+        const tasks = await taskModel.find({ userId })
+        if (!tasks) {
             return res.json({
                 success: false,
                 message: "Task not found"
@@ -44,7 +44,7 @@ export const getTasks = async(req, res) => {
             success: true,
             tasks
         })
-    } catch(error) {
+    } catch (error) {
         return res.status(400).json({
             success: false,
             message: error.message
@@ -52,18 +52,18 @@ export const getTasks = async(req, res) => {
     }
 }
 
-export const editTask = async(req, res) => {
+export const editTask = async (req, res) => {
     const taskId = req.params.id
-    const {task} = req.body
-    if(!task) {
+    const { task } = req.body
+    if (!task) {
         return res.json({
             success: false,
             message: "Enter a task!"
         })
     }
     try {
-        const updated = await taskModel.findByIdAndUpdate(taskId, {task}, {new: true})
-        if(!updated) {
+        const updated = await taskModel.findByIdAndUpdate(taskId, { task }, { new: true })
+        if (!updated) {
             return res.json({
                 success: false,
                 message: "Couldn't update task"
@@ -73,7 +73,7 @@ export const editTask = async(req, res) => {
             success: true,
             message: "Task updated successfully!"
         })
-    } catch(error) {
+    } catch (error) {
         return res.status(400).json({
             success: false,
             message: error.message
@@ -81,9 +81,48 @@ export const editTask = async(req, res) => {
     }
 }
 
-export const deleteTask = async(req, res) => {
-    const {id} = req.params
-    if(!id) {
+export const toggleTaskCompletion = async (req, res) => {
+    const taskId = req.params.id;
+    const { isCompleted } = req.body;
+
+    if (typeof isCompleted !== 'boolean') {
+        return res.status(400).json({
+            success: false,
+            message: "isCompleted boolean is required"
+        });
+    }
+
+    try {
+        const updatedTask = await taskModel.findByIdAndUpdate(
+            taskId,
+            { isCompleted },
+            { new: true }
+        );
+
+        if (!updatedTask) {
+            return res.status(404).json({
+                success: false,
+                message: "Task not found"
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: `Task marked as ${isCompleted ? 'completed' : 'not completed'}`,
+            task: updatedTask
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+
+export const deleteTask = async (req, res) => {
+    const { id } = req.params
+    if (!id) {
         return res.json({
             success: false,
             message: "Task not found!"
@@ -91,7 +130,7 @@ export const deleteTask = async(req, res) => {
     }
     try {
         const deletedTask = await taskModel.findByIdAndDelete(id);
-        if(!deletedTask) {
+        if (!deletedTask) {
             return res.json({
                 success: false,
                 message: "Task not found!"
@@ -101,7 +140,7 @@ export const deleteTask = async(req, res) => {
             success: true,
             message: "Task deleted successfully!"
         })
-    } catch(error) {
+    } catch (error) {
         return res.status(400).json({
             success: false,
             message: error.message
