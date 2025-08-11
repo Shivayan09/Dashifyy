@@ -22,6 +22,13 @@ export const addLink = async (req, res) => {
         })
     }
     try {
+        const existing = await youtubeLinkModel.findOne({url})
+        if(existing) {
+            return res.json({
+                success: false,
+                message: "Link is already added"
+            })
+        }
         const newLink = new youtubeLinkModel({ subjectId, heading, url })
         await newLink.save();
         return res.status(200).json({

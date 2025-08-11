@@ -14,6 +14,11 @@ const youtubeLinkSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+        required: true,
+    }
 })
 
 const youtubeLinkModel = mongoose.model.ytlink || mongoose.model('ytlink', youtubeLinkSchema)
