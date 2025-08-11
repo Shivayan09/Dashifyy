@@ -84,6 +84,20 @@ const ToDo = () => {
     }
   };
 
+  const handleToggleDone = async (id, currentStatus) => {
+    try {
+      const { data } = await axios.put(backendUrl + '/api/task/taskStatus/' + id, { isCompleted: !currentStatus })
+      if (data.success) {
+        toast.success(data.message)
+        fetchTasks()
+      } else {
+        toast.warn(data.message)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
   const handleDeleteConfirm = async () => {
     try {
       const { data } = await axios.delete(`${backendUrl}/api/task/deleteTask/${deleteId}`);
@@ -109,6 +123,7 @@ const ToDo = () => {
             type="text"
             placeholder="Add a task"
             value={task}
+            max={20}
             onChange={(e) => setTask(e.target.value)}
             className="h-9 md:h-10 w-[72%] text-purple-900 bg-gray-200/80 rounded-xl p-3 outline-none"
           />
@@ -147,7 +162,7 @@ const ToDo = () => {
               tasks.map((task, index) => (
                 <div
                   key={task._id}
-                  className="border-b border-purple-200 h-14 flex items-center mx-2 justify-between"
+                  className="border-b border-purple-200 h-20 md:h-14 flex items-center mx-2 justify-between"
                 >
                   {editingId === task._id ? (
                     <div className="flex items-center gap-2">
@@ -162,7 +177,10 @@ const ToDo = () => {
                       />
                     </div>
                   ) : (
-                    <p className="font-semibold text-purple-900/70 text-[1.15rem]">
+                    <p className={`font-semibold w-[60%] overflow-hidden text-[1rem] md:text-[1.15rem] ${task.isCompleted
+                      ? 'text-green-600/60'
+                      : 'text-purple-900/70'
+                      }`}>
                       <span className="mx-2">{index + 1}.</span>
                       {task.task}
                     </p>
@@ -178,24 +196,28 @@ const ToDo = () => {
                         <CheckCheck className="text-green-900 h-6 opacity-70" />
                       </button>
                     ) : (
-                      <div className='flex gap-5'>
-                        <button className='h-10 mx-3 border w-30 text-green-800/60 border-green-500 bg-green-100/40 rounded-md cursor-pointer transition-all duration-300 hover:bg-green-100 font-semibold text-[0.9rem]'>
-                          Mark as Done
+                      <div className='flex'>
+                        <button className={`h-8 md:h-10 mx-3 border w-28 md:w-30 rounded-md cursor-pointer transition-all duration-300 font-semibold text-[0.8rem] md:text-[0.9rem] hover:shadow-md
+                        ${task.isCompleted ? 'text-red-800/60 border-red-500 bg-red-100/40 hover:bg-red-100' : 'text-green-800/60 border-green-500 bg-green-100/40 hover:bg-green-100'}`}
+                          onClick={() => handleToggleDone(task._id, task.isCompleted)}>
+                          {task.isCompleted ? 'Mark undone' : 'Mark as done'}
                         </button>
-                        <button
+                        <div className='flex gap-2 items-center justify-center'>
+                          <button
                           onClick={() => handleEdit(task)}
                           className="flex items-center justify-center hover:scale-[1.02] cursor-pointer"
                         >
-                          <Pencil className="text-black h-5 opacity-50" />
+                          <Pencil className="text-black h-4 md:h-5 opacity-50" />
                         </button>
+                        <button
+                          onClick={() => setDeleteId(task._id)}
+                          className="flex items-center justify-center hover:scale-[1.02] cursor-pointer"
+                        >
+                          <img src={delete_icon} alt="" className="h-7.5 opacity-60" />
+                        </button>
+                        </div>
                       </div>
                     )}
-                    <button
-                      onClick={() => setDeleteId(task._id)}
-                      className="flex items-center justify-center hover:scale-[1.02] cursor-pointer"
-                    >
-                      <img src={delete_icon} alt="" className="h-7.5 opacity-60" />
-                    </button>
                   </div>
                 </div>
               ))

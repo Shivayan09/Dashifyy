@@ -53,9 +53,9 @@ const Home = () => {
         </div>
         <div className="box w-[100%] md:w-[50%] flex flex-col justify-center gap-7 px-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9}}
+            transition={{ duration: 0.5}}
           >
             <p className='text-purple-950/80 text-[1.2rem] md:text-[1.4rem] uppercase font-bold'>🎓 Your Personalized Dashboard</p>
           </motion.div>

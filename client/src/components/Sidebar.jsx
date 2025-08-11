@@ -36,8 +36,8 @@ const Sidebar = () => {
   const menuItems = [
     { id: 'subjects', label: 'Subjects', icon: subject_icon, path: '/dashboard/subjects' },
     { id: 'routine', label: 'Routine', icon: routine_icon, path: '/dashboard/routine' },
-    { id: 'analytics', label: 'Analytics', icon: analytics_logo, path: '/dashboard/analytics' },
     { id: 'todo', label: 'Tasks', icon: <List size={22} className='text-white h-7 w-7 opacity-90' />, path: '/dashboard/todo' },
+    { id: 'analytics', label: 'Analytics', icon: analytics_logo, path: '/dashboard/analytics' },
     { id: 'contact', label: 'Contact', icon: contact_icon, path: '/dashboard/contact' }
   ]
 

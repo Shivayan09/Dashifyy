@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { AppContext } from '../context/AppContext';
 import email_icon from '../assets/email-icon.png'
 import { useNavigate } from 'react-router-dom';
+import { motion } from "framer-motion"
 
 const UserCircle = () => {
 
@@ -84,16 +85,24 @@ const UserCircle = () => {
             {userData?.name?.[0]?.toUpperCase() || ''}
           </div>
           {dropDown &&
-            <div className='absolute w-55 z-50 top-20 rounded-2xl bg-purple-300 shadow-2xl right-5 flex flex-col gap-3 items-center justify-center p-5'>
-              <div className="user h-16 w-16 rounded-full bg-purple-200/30 flex items-center justify-center text-[1.4rem] text-purple-900/80 font-bold">
-                <img src={user_icon2} alt="" className='h-12' />
-              </div>
-              <p className='text-center text-[1.1rem] text-purple-900/70 font-semibold flex gap-3'>Hi {userData.name} !</p>
-              <p className='text-[0.9rem] text-purple-900/70 flex gap-1 items-center justify-center mt-1'> <img src={email_icon} alt="" className='h-5 w-6' /> {userData.email}</p>
-              <p className='text-purple-900/50 font-semibold text-[0.9rem] underline text-center cursor-pointer mb-3' onClick={() => navigate('/dashboard')}>Go to your own dashboard</p>
-              {!userData.isAccountVerified && <button className='h-8 bg-purple-900/50 cursor-pointer transition-all duration-300 hover:shadow-md hover:scale-[1.01] w-full rounded-md text-[0.9rem] text-white' onClick={sendVerificationOtp}>Verify email</button>}
-              <button className='h-8 bg-purple-900/50 cursor-pointer transition-all duration-300 hover:shadow-md hover:scale-[1.01] w-full rounded-md text-[0.9rem] text-white' onClick={logout}>Log Out</button>
-            </div>}
+            (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.25, ease: 'easeInOut' }}
+              >
+                <div className='absolute w-55 z-50 top-20 rounded-2xl bg-purple-300 shadow-2xl right-5 flex flex-col gap-3 items-center justify-center p-5'>
+                  <div className="user h-16 w-16 rounded-full bg-purple-200/30 flex items-center justify-center text-[1.4rem] text-purple-900/80 font-bold">
+                    <img src={user_icon2} alt="" className='h-12' />
+                  </div>
+                  <p className='text-center text-[1.1rem] text-purple-900/70 font-semibold flex gap-3'>Hi {userData.name} !</p>
+                  <p className='text-[0.9rem] text-purple-900/70 flex gap-1 items-center justify-center mt-1'> <img src={email_icon} alt="" className='h-5 w-6' /> {userData.email}</p>
+                  <p className='text-purple-900/50 font-semibold text-[0.9rem] underline text-center cursor-pointer mb-3' onClick={() => navigate('/dashboard')}>Go to your own dashboard</p>
+                  {!userData.isAccountVerified && <button className='h-8 bg-purple-900/50 cursor-pointer transition-all duration-300 hover:shadow-md hover:scale-[1.01] w-full rounded-md text-[0.9rem] text-white' onClick={sendVerificationOtp}>Verify email</button>}
+                  <button className='h-8 bg-purple-900/50 cursor-pointer transition-all duration-300 hover:shadow-md hover:scale-[1.01] w-full rounded-md text-[0.9rem] text-white' onClick={logout}>Log Out</button>
+                </div>
+              </motion.div>)}
         </div>}
     </div>
   )
