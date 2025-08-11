@@ -19,7 +19,7 @@ const Contact = () => {
         </button>
       </div>
       <div className="box w-[57%] h-screen flex items-center justify-center">
-        <img src={contact_us_icon3} alt="" className='opacity-80 h-[80vh]' />
+        <img src={contact_us_icon3} alt="" className='opacity-80 h-[70vh]' />
       </div>
     </div>
   )
