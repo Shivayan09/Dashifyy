@@ -14,6 +14,8 @@ import Contact from './pages/Dashboard/Contact'
 import ConstellationBackground from './components/ConstellationBackground'
 import Loading from './components/Loading'
 import ToDo from './pages/Dashboard/ToDo'
+import { AnimatePresence } from 'framer-motion'
+import PageWrapper from './components/PageWrapper'
 
 function App() {
   
@@ -37,19 +39,21 @@ function App() {
         pauseOnHover={false}
         theme="light"
       />
-      <Routes>
-        <Route path="/" element={isLoggedIn ? <Home /> : <Navigate to="/signup" />} />
-        <Route path="/dashboard" element={isLoggedIn ? <DashboardLayout/> : <Navigate to="/signup" />}>
-          <Route index element={<Navigate to='subjects'/>}/>
-          <Route path='subjects' element={<Subjects/>}/>
-          <Route path='routine' element={<Routine/>}/>
-          <Route path='todo' element={<ToDo/>}/>
-          <Route path='analytics' element={<Analytics/>}/>
-          <Route path='contact' element={<Contact/>}/>
-        </Route>
-        <Route path="/signup" element={<Signup/>}/>
-        <Route path="/verify-email" element={<VerifyEmail/>}/>
-      </Routes>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={isLoggedIn ? <PageWrapper><Home /></PageWrapper> : <Navigate to="/signup" />} />
+          <Route path="/dashboard" element={isLoggedIn ? <DashboardLayout/> : <Navigate to="/signup" />}>
+            <Route index element={<Navigate to='subjects'/>}/>
+            <Route path='subjects' element={<PageWrapper><Subjects/></PageWrapper>}/>
+            <Route path='routine' element={<PageWrapper><Routine/></PageWrapper>}/>
+            <Route path='todo' element={<PageWrapper><ToDo/></PageWrapper>}/>
+            <Route path='analytics' element={<PageWrapper><Analytics/></PageWrapper>}/>
+            <Route path='contact' element={<PageWrapper><Contact/></PageWrapper>}/>
+          </Route>
+          <Route path="/signup" element={<PageWrapper><Signup/></PageWrapper>} />
+          <Route path="/verify-email" element={<PageWrapper><VerifyEmail/></PageWrapper>} />
+        </Routes>
+      </AnimatePresence>
     </div>
   )
 }

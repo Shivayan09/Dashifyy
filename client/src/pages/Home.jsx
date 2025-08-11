@@ -19,6 +19,9 @@ import DashboardStats from '../components/DashboardStats'
 import ConstellationBackground from '../components/ConstellationBackground'
 import { useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
+import { motion } from "framer-motion";
+import LocomotiveScroll from "locomotive-scroll";
+import "locomotive-scroll/dist/locomotive-scroll.css";
 
 const Home = () => {
 
@@ -27,6 +30,10 @@ const Home = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
 
   useEffect(() => {
+    const scroll = new LocomotiveScroll({
+      el: document.querySelector("#main"),
+      smooth: true,
+    });
     const handleResize = () => {
       setIsMobile(window.innerWidth < 640);
     };
@@ -35,37 +42,44 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div id='main'>
       <BrandName />
       <Navbar />
       <UserCircle />
 
       <div className='flex flex-col md:flex-row bg-gradient-to-b from-purple-300 via-purple-300 to-white md:pt-20 lg:pt-0'>
-        <div className="box w-[100%] md:w-[50%] flex items-center justify-center">
+        <div data-scroll data-scroll-speed="-1" className="box w-[100%] md:w-[50%] flex items-center justify-center">
           <img src={home_logo} alt="" />
         </div>
         <div className="box w-[100%] md:w-[50%] flex flex-col justify-center gap-7 px-10">
-          <p className='text-purple-950/80 text-[1.2rem] md:text-[1.4rem] uppercase font-bold'>🎓 Your Personalized Dashboard</p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9}}
+          >
+            <p className='text-purple-950/80 text-[1.2rem] md:text-[1.4rem] uppercase font-bold'>🎓 Your Personalized Dashboard</p>
+          </motion.div>
+
           {isMobile ?
-          <p className='font-semibold text-purple-900/50 text-[0.9rem] md:text-[1.1rem]'>
-            Easily manage all your academic content in one streamlined dashboard. Add your subjects, store links
-            to lecture videos, upload notes, and keep everything neatly organized.
-          </p> :
-          <p className='font-semibold text-white/70 text-[0.9rem] md:text-[1.1rem]'>Easily manage all your academic content in one streamlined dashboard. Add your subjects, store links
-            to lecture videos, upload notes, and keep everything neatly organized. Whether you're preparing for exams,
-            catching up on missed classes, or just staying ahead, this is your go-to space for smart and focused learning.
-            Stay in control of your studies - all from one clean, accessible platform.
-          </p>}
+            <p className='font-semibold text-purple-900/50 text-[0.9rem] md:text-[1.1rem]'>
+              Easily manage all your academic content in one streamlined dashboard. Add your subjects, store links
+              to lecture videos, upload notes, and keep everything neatly organized.
+            </p> :
+            <p className='font-semibold text-white/70 text-[0.9rem] md:text-[1.1rem]'>Easily manage all your academic content in one streamlined dashboard. Add your subjects, store links
+              to lecture videos, upload notes, and keep everything neatly organized. Whether you're preparing for exams,
+              catching up on missed classes, or just staying ahead, this is your go-to space for smart and focused learning.
+              Stay in control of your studies - all from one clean, accessible platform.
+            </p>}
           <div className="group relative hover:shadow-xl flex justify-center items-center overflow-hidden button h-[7vh] md:h-14 mt-5 bg-purple-800/70 w-[90%] md:w-[60%] mx-auto md:mx-0 
           rounded-2xl cursor-pointer transition-all duration-300 hover:scale-[1.01]"
-          onClick={() => navigate('/dashboard')}>
+            onClick={() => navigate('/dashboard')}>
             <span className="absolute left-0 top-0 h-full w-0 bg-purple-800/30 transition-all duration-500 group-hover:w-full"></span>
             <p className='relative font-semibold text-white'>Get started right now!</p>
           </div>
         </div>
       </div>
 
-      <div className='flex flex-col md:flex-row mt-10 md:mt-0 bg-gradient-to-b from-white via-purple-200 to-purple-300'>
+      <div className='flex flex-col md:flex-row mt-10 md:mt-0 bg-gradient-to-b from-white via-purple-200 to-purple-300 h-fit'>
         <div className="box w-[100%] md:w-[50%] flex flex-col md:pl-16 justify-center gap-10">
           <div className="header flex items-center mx-auto md:mx-0 gap-7 w-[80%]">
             <p className='text-purple-900/80 font-bold text-[1.5rem] md:text-[2rem]'>Store</p>
@@ -115,13 +129,13 @@ const Home = () => {
             </li>
           </ul>
           <button className='bg-purple-800/70 relative overflow-hidden cursor-pointer transition-all hover:shadow-md hover:scale-[1.01] duration-300 group rounded-2xl group h-12 md:h-14 w-[80%] md:w-[60%] flex justify-center items-center mx-auto md:mx-0'
-          onClick={() => navigate('/dashboard')}>
+            onClick={() => navigate('/dashboard')}>
             <span className="absolute left-0 top-0 h-full w-0 bg-purple-800/20 transition-all duration-500 group-hover:w-full"></span>
             <p className='relative font-semibold text-white'>Go to Dashboard right now!</p>
             <img src={diagonal_arrow_rightUp} alt="" className='h-6 relative' />
           </button>
         </div>
-        <div className="box w-[100%] md:w-[50%] flex items-center justify-center">
+        <div data-scroll data-scroll-speed="-1" className="box w-[100%] md:w-[50%] flex items-center justify-center">
           <img src={home_logo2} alt="" className='h-[50vh] md:h-[90vh]' />
         </div>
       </div>
@@ -152,7 +166,7 @@ const Home = () => {
         <DashboardStats />
       </div>
 
-      <div className="footer bg-purple-300 flex flex-col">
+      <div className="footer bg-purple-300/80 h-fit flex flex-col">
         <div className="main-box flex flex-col md:flex-row w-full justify-evenly">
           <div className="box p-5 flex flex-col">
             <div className="header flex gap-2 items-center mx-auto md:mx-0">

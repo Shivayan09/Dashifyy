@@ -54,7 +54,7 @@ const DashboardStats = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-30 gap-y-20">
                 {/* Bar Chart */}
-                <div className="bg-white/20 p-4 rounded-2xl shadow mb-30 md:mb-50 h-20 w-80 lg:w-100">
+                <div className="bg-white/20 p-4 rounded-2xl shadow mb-30 md:mb-50 h-20 w-80 lg:w-100 transition-all duration-500 ease-in-out hover:scale-[1.03]">
                     <h3 className="text-lg font-semibold text-purple-900/70 mb-4">Weekly Tasks Completed</h3>
                     <ResponsiveContainer width="100%" height={200}>
                         <BarChart data={barData}>
@@ -71,7 +71,7 @@ const DashboardStats = () => {
                 </div>
 
                 {/* Line Chart */}
-                <div className="bg-white/20 p-4 rounded-2xl shadow mb-30 md:mb-50 h-20 w-80 lg:w-100">
+                <div className="bg-white/20 p-4 rounded-2xl shadow mb-30 md:mb-50 h-20 w-80 lg:w-100 transition-all duration-500 ease-in-out hover:scale-[1.03]">
                     <h3 className="text-lg font-semibold text-purple-900/70 mb-4">Daily Study Hours</h3>
                     <ResponsiveContainer width="100%" height={200}>
                         <LineChart data={lineData}>
@@ -85,7 +85,7 @@ const DashboardStats = () => {
                 </div>
 
                 {/* Pie Chart */}
-                <div className="bg-white/20 p-5 rounded-2xl shadow mb-30 h-20 w-80 lg:w-100">
+                <div className="bg-white/20 p-5 rounded-2xl shadow mb-30 h-20 w-80 lg:w-100 transition-all duration-500 ease-in-out hover:scale-[1.03]">
                     <h3 className="text-lg font-semibold text-purple-900/70 mb-4">Subject-wise Time Distribution</h3>
                     <ResponsiveContainer width="100%" height={200}>
                         <PieChart>
@@ -109,7 +109,7 @@ const DashboardStats = () => {
                 </div>
 
                 {/* Area Chart */}
-                <div className="bg-white/20 p-4 rounded-2xl mb-30 md:mb-40 shadow h-20 w-80 lg:w-100">
+                <div className="bg-white/20 p-4 rounded-2xl mb-30 md:mb-40 shadow h-20 w-80 lg:w-100 transition-all duration-500 ease-in-out hover:scale-[1.03]">
                     <h3 className="text-lg font-semibold text-purple-900/70 mb-4">Notes Added Over Time</h3>
                     <ResponsiveContainer width="100%" height={200}>
                         <AreaChart data={areaData}>
