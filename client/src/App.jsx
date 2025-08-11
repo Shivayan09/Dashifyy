@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { AppContext } from './context/AppContext'
-import { Route, Routes, Navigate } from 'react-router-dom'
+import { Route, Routes, Navigate, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
 import Signup from './pages/Signup'
 import { ToastContainer } from 'react-toastify'
@@ -16,10 +16,13 @@ import Loading from './components/Loading'
 import ToDo from './pages/Dashboard/ToDo'
 import { AnimatePresence } from 'framer-motion'
 import PageWrapper from './components/PageWrapper'
+import Resources from './pages/Dashboard/Resources'
 
 function App() {
   
   const { isLoggedIn, loading} = useContext(AppContext)
+
+  const location = useLocation();
 
   if(loading) return <Loading/>
   
@@ -44,6 +47,7 @@ function App() {
           <Route path="/" element={isLoggedIn ? <Home /> : <Navigate to="/signup" />} />
           <Route path="/dashboard" element={isLoggedIn ? <DashboardLayout/> : <Navigate to="/signup" />}>
             <Route index element={<Navigate to='subjects'/>}/>
+            <Route path="subjects/:subjectId/resources" element={<Resources />} />
             <Route path='subjects' element={<PageWrapper><Subjects/></PageWrapper>}/>
             <Route path='routine' element={<PageWrapper><Routine/></PageWrapper>}/>
             <Route path='todo' element={<PageWrapper><ToDo/></PageWrapper>}/>

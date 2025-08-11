@@ -1,3 +1,4 @@
+import subjectModel from "../models/subjectModel.js"
 import youtubeLinkModel from "../models/ytLinkModel.js"
 
 export const addLink = async (req, res) => {
@@ -49,18 +50,42 @@ export const addLink = async (req, res) => {
     }
 }
 
+export const getLinks = async(req, res) => {
+    const {userId} = req.body
+    const { subjectId } = req.params
+    const subject = await subjectModel.findById(subjectId);
+    try {
+        const links = await youtubeLinkModel.find({userId})
+        if(!links) {
+            return res.json({
+                success: false,
+                message: "No links found"
+            })
+        }
+        return res.status(200).json({
+            success: true,
+            links,
+            subject: { _id: subject._id, name: subject.name }
+        })
+    } catch(error) {
+        return res.status(400).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
 export const deleteLink = async(req, res) => {
     try {
         const {id} = req.params
         const {userId} = req.body
-        console.log(id)
         if(!id) {
             return res.json({
                 success: false,
                 message: "Link not found"
             })
         }
-        const deleted = await youtubeLinkModel.findByIdAndDelete({_id: id, userId: userId})
+        const deleted = await youtubeLinkModel.findByIdAndDelete(id, {userId})
         if(!deleted) {
             return res.json({
                 success: false,
