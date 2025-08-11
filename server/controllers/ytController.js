@@ -48,3 +48,33 @@ export const addLink = async (req, res) => {
         })
     }
 }
+
+export const deleteLink = async(req, res) => {
+    try {
+        const {id} = req.params
+        const {userId} = req.body
+        console.log(id)
+        if(!id) {
+            return res.json({
+                success: false,
+                message: "Link not found"
+            })
+        }
+        const deleted = await youtubeLinkModel.findByIdAndDelete({_id: id, userId: userId})
+        if(!deleted) {
+            return res.json({
+                success: false,
+                message: "Could not delete link"
+            })
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Link deleted successfully"
+        })
+    } catch(error) {
+        return res.status(400).json({
+            success: false,
+            message: error.message
+        })
+    }
+}

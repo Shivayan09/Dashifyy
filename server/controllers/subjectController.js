@@ -21,7 +21,7 @@ export const addSubject = async (req, res) => {
         })
     }
     try {
-        const existingSubject = await subjectModel.findOne({ name })
+        const existingSubject = await subjectModel.findOne({ name, userId })
         if (existingSubject) {
             return res.json({
                 success: false,
