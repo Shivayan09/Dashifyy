@@ -2,7 +2,13 @@ import youtubeLinkModel from "../models/ytLinkModel.js"
 
 export const addLink = async (req, res) => {
     const subjectId = req.params.subjectId
-    const { heading, url } = req.body
+    const { heading, url, userId } = req.body
+    if(!userId) {
+        return res.json({
+            success: false,
+            message: "User doesn't exist, login again!"
+        })
+    }
     if (!subjectId) {
         return res.json({
             success: false,
@@ -22,14 +28,14 @@ export const addLink = async (req, res) => {
         })
     }
     try {
-        const existing = await youtubeLinkModel.findOne({url})
+        const existing = await youtubeLinkModel.findOne({url, userId})
         if(existing) {
             return res.json({
                 success: false,
                 message: "Link is already added"
             })
         }
-        const newLink = new youtubeLinkModel({ subjectId, heading, url })
+        const newLink = new youtubeLinkModel({ subjectId, heading, url, userId })
         await newLink.save();
         return res.status(200).json({
             success: true,
