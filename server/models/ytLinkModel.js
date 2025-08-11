@@ -1,7 +1,7 @@
 import mongoose, { mongo } from "mongoose";
 
 const youtubeLinkSchema = new mongoose.Schema({
-    subject: {
+    subjectId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'subject',
         required: true,

@@ -213,7 +213,7 @@ const ToDo = () => {
                           onClick={() => setDeleteId(task._id)}
                           className="flex items-center justify-center hover:scale-[1.02] cursor-pointer"
                         >
-                          <img src={delete_icon} alt="" className="h-7.5 opacity-60" />
+                          <img src={delete_icon} alt="" className="h-7 md:h-7.5 w-7 md:w-7.5 opacity-60" />
                         </button>
                         </div>
                       </div>

@@ -41,7 +41,7 @@ function App() {
       />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={isLoggedIn ? <PageWrapper><Home /></PageWrapper> : <Navigate to="/signup" />} />
+          <Route path="/" element={isLoggedIn ? <Home /> : <Navigate to="/signup" />} />
           <Route path="/dashboard" element={isLoggedIn ? <DashboardLayout/> : <Navigate to="/signup" />}>
             <Route index element={<Navigate to='subjects'/>}/>
             <Route path='subjects' element={<PageWrapper><Subjects/></PageWrapper>}/>
