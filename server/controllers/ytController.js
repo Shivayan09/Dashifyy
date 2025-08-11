@@ -52,7 +52,7 @@ export const addLink = async (req, res) => {
 
 export const getLinks = async(req, res) => {
     const {userId} = req.body
-    const { subjectId } = req.params
+    const subjectId = req.params.subjectId
     const subject = await subjectModel.findById(subjectId);
     try {
         const links = await youtubeLinkModel.find({userId})
