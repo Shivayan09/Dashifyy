@@ -5,6 +5,9 @@ import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
 import ConfirmDelete from "../../components/ConfirmDelete";
 import delete_icon from '../../assets/delete-icon.png'
+import { Plus } from "lucide-react";
+import yt_icon from '../../assets/yt-icon.jpg'
+import no_data_icon2 from '../../assets/no-data-icon2.jpg'
 
 const Resources = () => {
     axios.defaults.withCredentials = true;
@@ -30,11 +33,6 @@ const Resources = () => {
     }, [subjectId]);
 
     const handleAddLink = async () => {
-        if (!heading.trim() || !url.trim()) {
-            toast.warn("Please fill out both heading and URL");
-            return;
-        }
-
         setLoading(true);
         try {
             const { data } = await axios.post(
@@ -105,7 +103,7 @@ const Resources = () => {
     return (
         <div className="px-5 md:px-10 pt-5">
 
-            <div className="flex flex-col md:flex-row justify-between items-center px-22 py-2 md:px-20 gap-2 mb-6 rounded-2xl">
+            <div className="flex flex-col md:flex-row items-center justify-between md:pr-20 py-2 gap-2 mb-6 rounded-2xl">
                 <div>
                     <span className="text-purple-900/70 text-[1.5rem] uppercase font-bold">
                         {subject?.name || "Loading..."} :
@@ -129,24 +127,25 @@ const Resources = () => {
 
             {activeTab === "yt" && (
                 <section>
-                    <div className="flex items-center mb-4">
+                    <div className="flex flex-col gap-3 md:flex-row items-center mb-4">
+                        <p className="text-purple-900/50 text-[1.05rem] md:mr-10">Add youtube video links here: </p>
                         <input
                             type="text"
                             placeholder="Heading"
-                            className="bg-purple-100 h-10 outline-none px-2"
+                            className="bg-purple-100 h-10 w-[100%] md:w-[30%] outline-none p-5 rounded-md"
                             value={heading}
                             onChange={(e) => setHeading(e.target.value)}
                         />
                         <input
                             type="url"
                             placeholder="YouTube URL"
-                            className="bg-purple-100 h-10 ml-2 outline-none px-2"
+                            className="bg-purple-100 h-10 w-[100%] md:w-[30%] outline-none p-5 rounded-md"
                             value={url}
                             onChange={(e) => setUrl(e.target.value)}
                         />
                         <button
                             disabled={loading}
-                            className="h-10 bg-purple-900/70 text-white font-semibold w-20 ml-2 cursor-pointer disabled:opacity-50"
+                            className="h-10 w-[100%] md:w-20 bg-purple-100 border border-purple-900/70 text-purple-900/80 font-semibold flex items-center justify-center rounded-md cursor-pointer disabled:opacity-50"
                             onClick={handleAddLink}
                         >
                             {loading ? "Adding..." : "Add"}
@@ -154,7 +153,10 @@ const Resources = () => {
                     </div>
 
                     {ytLinks.length === 0 ? (
-                        <p className="text-gray-500">No YouTube links available.</p>
+                        <div className="h-[70vh] flex flex-col justify-center items-center">
+                            <p className="text-gray-400">No YouTube links available.</p>
+                            <img src={no_data_icon2} alt="" className="h-[90%] opacity-90"/>
+                        </div>
                     ) : (
                         <ul>
                             {ytLinks.map((res) => (
@@ -172,7 +174,6 @@ const Resources = () => {
                                     </a>
                                     <button
                                         onClick={() => confirmDeleteLink(res._id)}
-                                        className="ml-4 text-red-500 hover:underline"
                                     >
                                         <img src={delete_icon} alt="" className="h-7 cursor-pointer opacity-60" />
                                     </button>

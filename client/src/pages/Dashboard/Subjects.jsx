@@ -174,10 +174,10 @@ const Subjects = () => {
           onChange={(e) => setCode(e.target.value)} />
         <input type="number" placeholder='Subject credit' className='h-10 w-full relative z-10 bg-white text-purple-900 md:w-[30%] border border-purple-400 shadow-md rounded-xl p-3 outline-none'
           onChange={(e) => setCredit(e.target.value)} />
-        <button className='text-purple-900 bg-purple-100 transition-all mx-auto md:mx-0 hover:shadow-md flex items-center justify-center border border-purple-800 h-10 w-full md:w-10 rounded-md cursor-pointer'
+        <button className='text-purple-900/80 bg-purple-100 transition-all mx-auto md:mx-0 hover:shadow-md flex items-center justify-center border border-purple-800 h-10 w-full md:w-20 font-semibold rounded-md cursor-pointer'
           onClick={handleAddSubject}>
             {isMobile && <p>Add Subject</p>}
-          {!isMobile && <Plus className='h-6 w-6 opacity-70'></Plus>}
+          {!isMobile && "Add"}
         </button>
       </div>
 

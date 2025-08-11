@@ -10,6 +10,7 @@ import ConfirmDelete from '../../components/ConfirmDelete';
 import { useNavigate } from 'react-router-dom';
 import DayDropdown from '../../components/DayDropdown';
 import no_data_icon from '../../assets/no-data-icon.png'
+import no_data_icon2 from '../../assets/no-data-icon2.jpg'
 
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -211,9 +212,9 @@ const Routine = () => {
         </h2>
 
         {routinesByDay[selectedDay]?.length === 0 ? (
-          <div className='flex items-center justify-center flex-col'>
-            <p className="text-gray-400 italic mt-5 text-[1.1rem]">No routines added yet for {selectedDay}</p>
-            <img src={no_data_icon} alt="" className='h-[45vh] md:h-[70vh] -mt-14'/>
+          <div className='flex items-center justify-center flex-col h-[65vh] border'>
+            <p className="text-gray-400 italic text-[1.1rem]">No routines added yet for {selectedDay}</p>
+            <img src={no_data_icon2} alt="" className='h-[90%] opacity-90'/>
           </div>
         ) : (
           <div className="flex flex-col gap-4 mb-5 md:mb-0">
