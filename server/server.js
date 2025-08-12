@@ -17,7 +17,8 @@ const port = process.env.PORT || 4000
 connectDB()
 
 const allowedOrigins = [
-  'http://localhost:5173'
+  'http://localhost:5173',
+  'https://dashify-frontend-rk1l.onrender.com',
 ];
 
 app.use(cors({
