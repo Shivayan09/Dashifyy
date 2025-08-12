@@ -5,9 +5,12 @@ import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
 import ConfirmDelete from "../../components/ConfirmDelete";
 import delete_icon from '../../assets/delete-icon.png'
-import { Plus } from "lucide-react";
+import { Plus, Youtube } from "lucide-react";
 import yt_icon from '../../assets/yt-icon.jpg'
 import no_data_icon2 from '../../assets/no-data-icon2.jpg'
+import yt_logo from '../../assets/yt-logo.png'
+import yt_logo2 from '../../assets/yt-logo2.png'
+import yt_logo3 from '../../assets/yt-logo3.png'
 
 const Resources = () => {
     axios.defaults.withCredentials = true;
@@ -32,7 +35,17 @@ const Resources = () => {
         }
     }, [subjectId]);
 
+    const isValidYouTubeUrl = (url) => {
+        const ytRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
+        return ytRegex.test(url);
+    };
+
+
     const handleAddLink = async () => {
+        if (!isValidYouTubeUrl(url)) {
+            toast.warn("Please enter a valid YouTube URL");
+            return;
+        }
         setLoading(true);
         try {
             const { data } = await axios.post(
@@ -105,7 +118,7 @@ const Resources = () => {
 
             <div className="flex flex-col md:flex-row items-center justify-between md:pr-20 py-2 gap-2 mb-6 rounded-2xl">
                 <div>
-                    <span className="text-purple-900/70 text-[1.5rem] uppercase font-bold">
+                    <span className="text-purple-900/80 text-[1.5rem] uppercase font-bold">
                         {subject?.name || "Loading..."} :
                     </span>
                 </div>
@@ -155,22 +168,19 @@ const Resources = () => {
                     {ytLinks.length === 0 ? (
                         <div className="h-[70vh] flex flex-col justify-center items-center">
                             <p className="text-gray-400">No YouTube links available.</p>
-                            <img src={no_data_icon2} alt="" className="h-[90%] opacity-90"/>
+                            <img src={no_data_icon2} alt="" className="h-[90%] opacity-90" />
                         </div>
                     ) : (
                         <ul>
-                            {ytLinks.map((res) => (
+                            {ytLinks.map((res, index) => (
                                 <li
                                     key={res._id}
-                                    className="mb-3 p-3 bg-purple-50 rounded-lg shadow-sm flex justify-between items-center"
+                                    className="mb-3 p-1 bg-purple-50 rounded-lg shadow-sm flex justify-between items-center"
                                 >
-                                    <a
-                                        href={res.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-purple-700 underline"
-                                    >
-                                        {res.heading}
+                                    <p className="text-purple-900/80 font-semibold w-[50%] text-[1.15rem]"> <span>{index + 1}.</span> {res.heading}</p>
+                                    <a href={res.url} target="_blank" className="flex gap-2 items-center transition-all duration-300 hover:scale-[1.01] cursor-pointer hover:underline text-purple-900/80">
+                                        <span className="text-purple-900/80 text-[0.9rem]">Video Link :</span>
+                                        <img src={yt_logo3} alt="" className="h-10" />
                                     </a>
                                     <button
                                         onClick={() => confirmDeleteLink(res._id)}

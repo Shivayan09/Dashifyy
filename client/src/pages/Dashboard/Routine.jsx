@@ -212,7 +212,7 @@ const Routine = () => {
         </h2>
 
         {routinesByDay[selectedDay]?.length === 0 ? (
-          <div className='flex items-center justify-center flex-col h-[65vh] border'>
+          <div className='flex items-center justify-center flex-col h-[65vh]'>
             <p className="text-gray-400 italic text-[1.1rem]">No routines added yet for {selectedDay}</p>
             <img src={no_data_icon2} alt="" className='h-[90%] opacity-90'/>
           </div>
