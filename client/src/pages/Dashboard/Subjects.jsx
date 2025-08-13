@@ -182,7 +182,7 @@ const Subjects = () => {
       </div>
 
       <div className="display">
-        <div className="box w-full flex flex-col gap-5 md:gap-5 h-[70vh] md:overflow-y-auto">
+        <div className="box w-full flex flex-col gap-10 md:gap-5 h-[70vh] md:overflow-y-auto">
           {filteredSubjects.length === 0 ? (
             <div className='flex flex-col items-center justify-center'>
               <img src={no_data_icon} alt="" className='h-[65vh]' />
