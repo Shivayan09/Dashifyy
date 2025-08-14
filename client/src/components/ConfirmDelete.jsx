@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const backdropVariants = {
@@ -18,9 +18,23 @@ const ConfirmDelete = ({
   onConfirm,
   title,
   message,
-  confirmText,
-  cancelText
+  confirmText = "Delete",
+  cancelText = "Cancel"
 }) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleConfirm = async () => {
+    setLoading(true);
+    try {
+      await onConfirm(); // ensure onConfirm returns a promise
+      setLoading(false);
+      onClose();
+    } catch (error) {
+      setLoading(false);
+      console.error(error);
+    }
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -40,18 +54,30 @@ const ConfirmDelete = ({
             exit="exit"
             transition={{ duration: 0.3 }}
           >
-            <h2 className="text-[1.2rem] font-bold text-purple-900/80 mb-2">{title}</h2>
+            <h2 className="text-[1.2rem] font-bold text-purple-900/80 mb-2">
+              {title}
+            </h2>
             <p className="text-[0.9rem] text-purple-900/70 my-5">{message}</p>
             <div className="flex items-center justify-center gap-3">
               <button
-                onClick={onConfirm}
-                className="bg-red-50 cursor-pointer hover:bg-rose-100 hover:shadow-md text-red-400 border border-red-400 px-4 py-2 rounded-xl transition"
+                onClick={handleConfirm}
+                disabled={loading}
+                className={`px-4 py-2 rounded-xl transition border border-red-400 ${
+                  loading
+                    ? "bg-red-50 text-red-300 cursor-not-allowed"
+                    : "bg-red-50 text-red-400 hover:bg-rose-100 hover:shadow-md cursor-pointer"
+                }`}
               >
-                {confirmText}
+                {loading ? "Deleting..." : confirmText}
               </button>
               <button
                 onClick={onClose}
-                className="bg-white cursor-pointer hover:shadow-md border border-purple-900 text-purple-900 hover:bg-purple-100 px-4 py-2 rounded-xl transition"
+                disabled={loading}
+                className={`px-4 py-2 rounded-xl transition border border-purple-900 ${
+                  loading
+                    ? "bg-gray-100 text-gray-500 cursor-not-allowed"
+                    : "bg-white text-purple-900 hover:shadow-md hover:bg-purple-100 cursor-pointer"
+                }`}
               >
                 {cancelText}
               </button>
