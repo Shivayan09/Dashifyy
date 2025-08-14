@@ -41,8 +41,8 @@ const CollapsibleBoxes = () => {
           <div
             key={index}
             onClick={() => toggle(index)}
-            className="group relative overflow-hidden shadow-xs shadow-purple-950 rounded-xl p-4 mx-16 md:mx-7 bg-purple-100 
-            text-purple-800/80 cursor-pointer hover:shadow-md transition duration-300"
+            className="group relative overflow-hidden shadow-xs shadow-purple-950 rounded-xl p-4 md:mx-7 bg-purple-100 
+            text-purple-800/80 cursor-pointer hover:shadow-md transition duration-300 w-full"
           >
             <span className="absolute left-0 top-0 h-full w-0 bg-purple-200/70 transition-all duration-200 group-hover:w-full"></span>
             <div className="relative z-10 flex justify-between items-center">

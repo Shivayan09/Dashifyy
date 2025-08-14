@@ -47,7 +47,7 @@ const Home = () => {
       <Navbar />
       <UserCircle />
 
-      <div className='flex flex-col md:flex-row bg-gradient-to-b from-purple-300 via-purple-300 to-white md:pt-20 lg:pt-0'>
+      <div className='flex flex-col md:flex-row md:pt-20 bg-purple-100 lg:pt-0'>
         <div data-scroll data-scroll-speed="-1" className="box w-[100%] md:w-[50%] flex items-center justify-center">
           <img src={home_logo} alt="" />
         </div>
@@ -65,7 +65,7 @@ const Home = () => {
               Easily manage all your academic content in one streamlined dashboard. Add your subjects, store links
               to lecture videos, upload notes, and keep everything neatly organized.
             </p> :
-            <p className='font-semibold text-white/70 text-[0.9rem] md:text-[1.1rem]'>Easily manage all your academic content in one streamlined dashboard. Add your subjects, store links
+            <p className='font-semibold text-purple-900/50 text-[0.9rem] md:text-[1.1rem]'>Easily manage all your academic content in one streamlined dashboard. Add your subjects, store links
               to lecture videos, upload notes, and keep everything neatly organized. Whether you're preparing for exams,
               catching up on missed classes, or just staying ahead, this is your go-to space for smart and focused learning.
               Stay in control of your studies - all from one clean, accessible platform.
@@ -79,7 +79,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className='flex flex-col md:flex-row mt-10 md:mt-0 bg-gradient-to-b from-white via-purple-200 to-purple-300 h-fit'>
+      <div className='flex flex-col md:flex-row mt-10 md:mt-0 bg-purple-100 h-fit'>
         <div className="box w-[100%] md:w-[50%] flex flex-col md:pl-16 justify-center gap-10">
           <div className="header flex items-center mx-auto md:mx-0 gap-7 w-[80%]">
             <p className='text-purple-900/80 font-bold text-[1.5rem] md:text-[2rem]'>Store</p>
@@ -140,21 +140,21 @@ const Home = () => {
         </div>
       </div>
 
-      <div className='flex flex-col md:flex-row bg-gradient-to-b from-purple-300 via-purple-200 to-white gap-10 md:gap-0'>
+      <div className='flex flex-col md:flex-row bg-purple-100 gap-10 md:gap-0'>
         <div className="box py-5 md:py-20 w-[100%] md:w-[50%] flex flex-col gap-7 items-center md:items-start md:mx-0 px-5 md:pl-10 md:pr-20">
           <QnAs />
         </div>
         <div className="box w-[90%] md:w-[50%] px-10 flex flex-col mx-auto md:mx-0 justify-center">
           <div className="boxes flex gap-7 flex-col">
-            <div className="mini-box flex items-center h-16 md:h-26 shadow-md rounded-xl bg-purple-100">
+            <div className="mini-box flex items-center h-16 md:h-20 shadow-md rounded-xl bg-purple-100">
               <div className="circle h-10 w-10 md:h-14 md:w-14 shadow-xl -ml-7 bg-purple-400/70 rounded-full flex text-white justify-center items-center">1</div>
               <p className='text-purple-800/80 text-[0.9rem] md:text-[1.1rem] font-semibold px-5'>Centralized Academic Management</p>
             </div>
-            <div className="mini-box flex items-center h-16 md:h-26 shadow-md rounded-xl bg-purple-100">
+            <div className="mini-box flex items-center h-16 md:h-20 shadow-md rounded-xl bg-purple-100">
               <div className="circle h-10 w-10 md:h-14 md:w-14 shadow-xl -ml-7 bg-purple-400/70 rounded-full flex text-white justify-center items-center">2</div>
               <p className='text-purple-800/80 text-[0.9rem] md:text-[1.1rem] font-semibold px-5'>Cloud-Based Accessibility</p>
             </div>
-            <div className="mini-box flex items-center h-16 md:h-26 shadow-md rounded-xl bg-purple-100">
+            <div className="mini-box flex items-center h-16 md:h-20 shadow-md rounded-xl bg-purple-100">
               <div className="circle h-10 w-10 md:h-14 md:w-14 shadow-xl -ml-7 bg-purple-400/70 rounded-full flex text-white justify-center items-center">3</div>
               <p className='text-purple-800/80 text-[0.9rem] md:text-[1.1rem] font-semibold px-5'>Live ChatBot to answer doubts</p>
             </div>
@@ -162,11 +162,11 @@ const Home = () => {
         </div>
       </div>
 
-      <div className='flex justify-center items-center bg-gradient-to-b from-white via-white to-purple-300'>
+      <div className='flex justify-center items-center bg-purple-100'>
         <DashboardStats />
       </div>
 
-      <div className="footer bg-purple-300/80 h-fit flex flex-col">
+      <div className="footer bg-purple-200 h-fit flex flex-col">
         <div className="main-box flex flex-col md:flex-row w-full justify-evenly">
           <div className="box p-5 flex flex-col">
             <div className="header flex gap-2 items-center mx-auto md:mx-0">
