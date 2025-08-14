@@ -1,16 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
 import ConfirmDelete from "../../components/ConfirmDelete";
-import delete_icon from '../../assets/delete-icon.png'
-import { Plus, Youtube } from "lucide-react";
-import yt_icon from '../../assets/yt-icon.jpg'
-import no_data_icon2 from '../../assets/no-data-icon2.jpg'
-import yt_logo from '../../assets/yt-logo.png'
-import yt_logo2 from '../../assets/yt-logo2.png'
-import yt_logo3 from '../../assets/yt-logo3.png'
+import delete_icon from '../../assets/delete-icon.png';
+import yt_icon from '../../assets/yt-icon.jpg';
+import no_data_icon2 from '../../assets/no-data-icon2.jpg';
+import yt_logo3 from '../../assets/yt-logo3.png';
+import ResourceDropdown from "../../components/ResourceDropdown";
+import home_icon from '../../assets/home-icon.png'
 
 const Resources = () => {
     axios.defaults.withCredentials = true;
@@ -39,7 +38,6 @@ const Resources = () => {
         const ytRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
         return ytRegex.test(url);
     };
-
 
     const handleAddLink = async () => {
         if (!isValidYouTubeUrl(url)) {
@@ -113,35 +111,47 @@ const Resources = () => {
         }
     };
 
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    
+      useEffect(() => {
+        const handleResize = () => {
+          setIsMobile(window.innerWidth < 768);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+      }, []);
+
+      const navigate = useNavigate()
+
     return (
         <div className="px-5 md:px-10 pt-5">
 
-            <div className="flex flex-col md:flex-row items-center justify-between md:pr-20 py-2 gap-2 mb-6 rounded-2xl">
+            {/* Subject Name + Dropdown */}
+            <div className="flex flex-col md:flex-row items-center justify-between py-2 gap-2 mb-6 rounded-2xl">
                 <div>
                     <span className="text-purple-900/80 text-[1.5rem] uppercase font-bold">
                         {subject?.name || "Loading..."} :
                     </span>
                 </div>
-                {["yt", "docs", "notes"].map((tab) => (
-                    <button
-                        key={tab}
-                        className={`h-10 px-1 rounded-t-md transition-all cursor-pointer ${activeTab === tab
-                            ? "border-b-2 border-purple-900/70 text-purple-900/80 font-semibold text-[1.1rem]"
-                            : "text-purple-900/60 font-semibold text-[1.1rem]"
-                            }`}
-                        onClick={() => setActiveTab(tab)}
-                    >
-                        {tab === "yt" && "Saved videos"}
-                        {tab === "docs" && "Saved documents"}
-                        {tab === "notes" && "Notes"}
-                    </button>
-                ))}
+                <div className="flex gap-5">
+                    <ResourceDropdown
+                    selectedResource={activeTab}
+                    setSelectedResource={setActiveTab}
+                />
+                {!isMobile &&
+                <button className='cursor-pointer transition-all duration-300 hover:scale-[1.02]' onClick={() => navigate('/')}>
+                    <img src={home_icon} alt="" className='h-8 opacity-30' />
+                </button>}
+                </div>
             </div>
 
+            {/* YouTube Links */}
             {activeTab === "yt" && (
                 <section>
                     <div className="flex flex-col gap-3 md:flex-row items-center mb-4">
-                        <p className="text-purple-900/50 text-[1.05rem] md:mr-10">Add youtube video links here: </p>
+                        <p className="text-purple-900/50 text-[1.05rem] md:mr-10">
+                            Add YouTube video links here:
+                        </p>
                         <input
                             type="text"
                             placeholder="Heading"
@@ -177,14 +187,21 @@ const Resources = () => {
                                     key={res._id}
                                     className="mb-3 p-1 bg-purple-50 rounded-lg shadow-sm flex justify-between items-center"
                                 >
-                                    <p className="text-purple-900/80 font-semibold w-[50%] text-[1.15rem]"> <span>{index + 1}.</span> {res.heading}</p>
-                                    <a href={res.url} target="_blank" className="flex gap-2 items-center transition-all duration-300 hover:scale-[1.01] cursor-pointer hover:underline text-purple-900/80">
-                                        <span className="text-purple-900/80 text-[0.9rem]">Video Link :</span>
+                                    <p className="text-purple-900/80 font-semibold w-[50%] text-[1.15rem]">
+                                        <span>{index + 1}.</span> {res.heading}
+                                    </p>
+                                    <a
+                                        href={res.url}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="flex gap-2 items-center transition-all duration-300 hover:scale-[1.01] cursor-pointer hover:underline text-purple-900/80"
+                                    >
+                                        <span className="text-purple-900/80 text-[0.9rem]">
+                                            Video Link :
+                                        </span>
                                         <img src={yt_logo3} alt="" className="h-10" />
                                     </a>
-                                    <button
-                                        onClick={() => confirmDeleteLink(res._id)}
-                                    >
+                                    <button onClick={() => confirmDeleteLink(res._id)}>
                                         <img src={delete_icon} alt="" className="h-7 cursor-pointer opacity-60" />
                                     </button>
                                 </li>
@@ -194,12 +211,14 @@ const Resources = () => {
                 </section>
             )}
 
+            {/* Notes */}
             {activeTab === "notes" && (
                 <section>
                     <p className="text-gray-500">Notes section coming soon.</p>
                 </section>
             )}
 
+            {/* Documents */}
             {activeTab === "docs" && (
                 <section>
                     <p className="text-gray-500">Document links section coming soon.</p>
