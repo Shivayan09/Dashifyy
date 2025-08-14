@@ -178,11 +178,11 @@ const Subjects = () => {
       </div>
 
       <div className="add py-5 flex flex-col md:flex-row gap-3 md:gap-5 mb-5 md:mb-0">
-        <input type="text" placeholder='Subject name' className='h-10 w-full relative z-10 bg-white text-purple-900 md:w-[30%] border border-purple-400 shadow-md rounded-xl p-3 outline-none'
+        <input type="text" placeholder='Subject name' className='h-10 w-full relative z-10 bg-purple-100 text-purple-900 md:w-[30%] rounded-md p-3 outline-none'
           onChange={(e) => setName(e.target.value)} />
-        <input type="text" placeholder='Subject code' className='h-10 w-full relative z-10 bg-white text-purple-900 md:w-[30%] border border-purple-400 shadow-md rounded-xl p-3 outline-none'
+        <input type="text" placeholder='Subject code' className='h-10 w-full relative z-10 bg-purple-100 text-purple-900 md:w-[30%] rounded-md p-3 outline-none'
           onChange={(e) => setCode(e.target.value)} />
-        <input type="number" placeholder='Subject credit' className='h-10 w-full relative z-10 bg-white text-purple-900 md:w-[30%] border border-purple-400 shadow-md rounded-xl p-3 outline-none'
+        <input type="number" placeholder='Subject credit' className='h-10 w-full relative z-10 bg-purple-100 text-purple-900 md:w-[30%] rounded-md p-3 outline-none'
           onChange={(e) => setCredit(e.target.value)} />
         <button className={`${loading ? 'bg-purple-50 text-purple-900/70' : 'bg-purple-100 text-purple-900/80 '} transition-all mx-auto md:mx-0 hover:shadow-md flex items-center justify-center border border-purple-800 h-10 w-full md:w-20 font-semibold rounded-md cursor-pointer`}
           onClick={handleAddSubject}>

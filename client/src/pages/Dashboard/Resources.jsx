@@ -155,14 +155,14 @@ const Resources = () => {
                         <input
                             type="text"
                             placeholder="Heading"
-                            className="bg-purple-100 h-10 w-[100%] md:w-[30%] outline-none p-5 rounded-md"
+                            className="bg-purple-100 h-10 text-purple-900 w-[100%] md:w-[30%] outline-none p-5 rounded-md"
                             value={heading}
                             onChange={(e) => setHeading(e.target.value)}
                         />
                         <input
                             type="url"
                             placeholder="YouTube URL"
-                            className="bg-purple-100 h-10 w-[100%] md:w-[30%] outline-none p-5 rounded-md"
+                            className="bg-purple-100 h-10 text-purple-900 w-[100%] md:w-[30%] outline-none p-5 rounded-md"
                             value={url}
                             onChange={(e) => setUrl(e.target.value)}
                         />

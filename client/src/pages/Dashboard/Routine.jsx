@@ -175,7 +175,7 @@ const Routine = () => {
             onChange={(e) => handleInputChange(selectedDay, 'subject', e.target.value)}
             type="text"
             maxLength={25}
-            className='h-10 w-[100%] md:w-[20%] rounded-lg bg-white border border-purple-900 text-purple-900 outline-none p-3'
+            className='h-10 w-[100%] md:w-[20%] rounded-lg bg-purple-100 border-purple-900 text-purple-900 outline-none p-3'
             placeholder='Subject'
           />
           <input
@@ -184,7 +184,7 @@ const Routine = () => {
             type="number"
             max={12}
             min={1}
-            className='h-10 w-[100%] md:w-[20%] rounded-lg bg-white border border-purple-900 text-purple-900 outline-none p-3'
+            className='h-10 w-[100%] md:w-[20%] rounded-lg bg-purple-100 border-purple-900 text-purple-900 outline-none p-3'
             placeholder='Start time'
           />
           <input
@@ -193,14 +193,14 @@ const Routine = () => {
             type="number"
             max={12}
             min={1}
-            className='h-10 w-[100%] md:w-[20%] rounded-lg bg-white border border-purple-900 text-purple-900 outline-none p-3'
+            className='h-10 w-[100%] md:w-[20%] rounded-lg bg-purple-100 border-purple-900 text-purple-900 outline-none p-3'
             placeholder='End time'
           />
           <input
             value={formInputs[selectedDay]?.location || ''}
             onChange={(e) => handleInputChange(selectedDay, 'location', e.target.value)}
             type="text"
-            className='h-10 w-[100%] md:w-[20%] rounded-lg bg-white border border-purple-900 text-purple-900 outline-none p-3'
+            className='h-10 w-[100%] md:w-[20%] rounded-lg bg-purple-100 border-purple-900 text-purple-900 outline-none p-3'
             placeholder='Location'
           />
         </div>

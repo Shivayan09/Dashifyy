@@ -16,6 +16,7 @@ import ToDo from './pages/Dashboard/ToDo'
 import { AnimatePresence } from 'framer-motion'
 import PageWrapper from './components/PageWrapper'
 import Resources from './pages/Dashboard/Resources'
+import Account from './pages/Dashboard/Account'
 
 function App() {
   
@@ -52,6 +53,7 @@ function App() {
             <Route path='todo' element={<PageWrapper><ToDo/></PageWrapper>}/>
             <Route path='analytics' element={<PageWrapper><Analytics/></PageWrapper>}/>
             <Route path='contact' element={<PageWrapper><Contact/></PageWrapper>}/>
+            <Route path='account' element={<PageWrapper><Account/></PageWrapper>}/>
           </Route>
           <Route path="/signup" element={<PageWrapper><Signup/></PageWrapper>} />
           <Route path="/verify-email" element={<PageWrapper><VerifyEmail/></PageWrapper>} />

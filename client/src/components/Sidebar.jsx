@@ -4,6 +4,7 @@ import routine_icon from '../assets/routine-icon.png'
 import chatbot_icon from '../assets/chatbot-icon.png'
 import contact_icon from '../assets/contact-icon.png'
 import analytics_logo from '../assets/analytics-logo.png'
+import user_icon from '../assets/user-icon-white.png'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { List, Menu } from 'lucide-react'
 
@@ -38,7 +39,8 @@ const Sidebar = () => {
     { id: 'routine', label: 'Routine', icon: routine_icon, path: '/dashboard/routine' },
     { id: 'todo', label: 'Tasks', icon: <List size={22} className='text-white h-7 w-7 opacity-90' />, path: '/dashboard/todo' },
     { id: 'analytics', label: 'Analytics', icon: analytics_logo, path: '/dashboard/analytics' },
-    { id: 'contact', label: 'Contact', icon: contact_icon, path: '/dashboard/contact' }
+    { id: 'contact', label: 'Contact', icon: contact_icon, path: '/dashboard/contact' },
+    {id: 'account', label: 'Account', icon: user_icon, path: '/dashboard/account'},
   ]
 
   const renderSidebarContent = () => (
@@ -65,7 +67,7 @@ const Sidebar = () => {
             onClick={() => handleClick(id, path)}
           >
             {typeof icon === 'string' ? (
-              <img src={icon} alt={`${label} icon`} className='h-8 opacity-90' />
+              <img src={icon} alt={`${label} icon`} className='h-7 opacity-90' />
             ) : (
               <div className="icon flex items-center justify-center h-8 w-8 opacity-90">{icon}</div>
             )}
