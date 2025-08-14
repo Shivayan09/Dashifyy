@@ -184,7 +184,7 @@ const Subjects = () => {
           onChange={(e) => setCode(e.target.value)} />
         <input type="number" placeholder='Subject credit' className='h-10 w-full relative z-10 bg-white text-purple-900 md:w-[30%] border border-purple-400 shadow-md rounded-xl p-3 outline-none'
           onChange={(e) => setCredit(e.target.value)} />
-        <button className={`text-purple-900/80 ${loading ? 'bg-purple-100' : 'bg-purple-50'} transition-all mx-auto md:mx-0 hover:shadow-md flex items-center justify-center border border-purple-800 h-10 w-full md:w-20 font-semibold rounded-md cursor-pointer`}
+        <button className={`${loading ? 'bg-purple-50 text-purple-900/70' : 'bg-purple-100 text-purple-900/80 '} transition-all mx-auto md:mx-0 hover:shadow-md flex items-center justify-center border border-purple-800 h-10 w-full md:w-20 font-semibold rounded-md cursor-pointer`}
           onClick={handleAddSubject}>
             {isMobile && (loading ? "Adding.." : "Add subject")}
           {!isMobile && (loading ? "Adding.." : "Add")}

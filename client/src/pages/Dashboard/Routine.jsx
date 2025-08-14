@@ -205,7 +205,7 @@ const Routine = () => {
           />
         </div>
         <button
-          className='border border-purple-700 bg-purple-100 cursor-pointer flex items-center justify-center h-10 w-full md:w-16 rounded-md text-purple-900 hover:shadow-xl'
+          className={`${loading ? "bg-purple-50 text-purple-900/70" : "bg-purple-100 text-purple-900/80"} border font-semibold border-purple-700 cursor-pointer flex items-center justify-center h-10 w-full md:w-16 rounded-md hover:shadow-xl`}
           onClick={() => handleAddRoutine(selectedDay)}
         >
           {loading ? "Adding.." : "Add"}
