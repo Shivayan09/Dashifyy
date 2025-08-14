@@ -23,6 +23,8 @@ const Subjects = () => {
   const [credit, setCredit] = useState('');
   const [importance, setImportance] = useState('')
 
+  const [loading, setLoading] = useState(false);
+
   const getImportance = (credit) => {
     if (credit <= 1) {
       return {
@@ -63,6 +65,7 @@ const Subjects = () => {
   };
 
   const handleAddSubject = async () => {
+    setLoading(true)
     try {
       const { data } = await axios.post(backendUrl + '/api/subject/addSubject', { name, code, credit })
       if (data.success) {
@@ -76,10 +79,13 @@ const Subjects = () => {
       }
     } catch (error) {
       toast.error(error.message)
+    } finally {
+      setLoading(false)
     }
   };
 
   const handleDeleteSubject = async (subjectId) => {
+    setLoading(true)
     try {
       const { data } = await axios.delete(backendUrl + '/api/subject/deleteSubject/' + subjectId);
       if (data.success) {
@@ -93,6 +99,7 @@ const Subjects = () => {
     } finally {
       setIsDeleteModalOpen(false);
       setItemToDelete(null);
+      setLoading(false)
     }
   };
 
@@ -126,6 +133,7 @@ const Subjects = () => {
   }
 
   const handleSubjectEdit = async () => {
+    setLoading(true)
     try {
       const { data } = await axios.put(backendUrl + '/api/subject/editSubject/' + editSubjectId, {
         name: editName,
@@ -141,6 +149,8 @@ const Subjects = () => {
       }
     } catch (error) {
       toast.error(error.message)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -174,10 +184,10 @@ const Subjects = () => {
           onChange={(e) => setCode(e.target.value)} />
         <input type="number" placeholder='Subject credit' className='h-10 w-full relative z-10 bg-white text-purple-900 md:w-[30%] border border-purple-400 shadow-md rounded-xl p-3 outline-none'
           onChange={(e) => setCredit(e.target.value)} />
-        <button className='text-purple-900/80 bg-purple-100 transition-all mx-auto md:mx-0 hover:shadow-md flex items-center justify-center border border-purple-800 h-10 w-full md:w-20 font-semibold rounded-md cursor-pointer'
+        <button className={`text-purple-900/80 ${loading ? 'bg-purple-100' : 'bg-purple-50'} transition-all mx-auto md:mx-0 hover:shadow-md flex items-center justify-center border border-purple-800 h-10 w-full md:w-20 font-semibold rounded-md cursor-pointer`}
           onClick={handleAddSubject}>
-            {isMobile && <p>Add Subject</p>}
-          {!isMobile && "Add"}
+            {isMobile && (loading ? "Adding.." : "Add subject")}
+          {!isMobile && (loading ? "Adding.." : "Add")}
         </button>
       </div>
 
@@ -224,7 +234,7 @@ const Subjects = () => {
                 <div className="buttons h-10 flex items-center gap-5">
                   {editSubjectId === subject._id ? (
                     <>
-                      <button onClick={handleSubjectEdit} className='text-sm bg-purple-800/60 text-white h-9 w-20 rounded-md cursor-pointer hover:shadow-md'>Save</button>
+                      <button onClick={handleSubjectEdit} className='text-sm bg-purple-800/60 text-white h-9 w-20 rounded-md cursor-pointer hover:shadow-md'>{loading ? "Saving.." : "Save"}</button>
                       <button onClick={() => setEditSubjectId(null)} className='text-sm bg-white border border-purple-700 text-purple-900 h-9 w-20 rounded-md cursor-pointer hover:shadow-md'>Cancel</button>
                     </>
                   ) : (

@@ -34,6 +34,8 @@ const Routine = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
 
+  const [loading, setLoading] = useState();
+
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleResize);
@@ -65,8 +67,8 @@ const Routine = () => {
 
   const handleAddRoutine = async (day) => {
     const { subject, start, end, location } = formInputs[day] || {};
-
     try {
+      setLoading(true)
       const { data } = await axios.post(`${backendUrl}/api/routine/addRoutine`, {
         subject, start, end, location, day
       });
@@ -80,6 +82,8 @@ const Routine = () => {
       }
     } catch (err) {
       toast.error("Could not add routine");
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -93,6 +97,7 @@ const Routine = () => {
 
   const handleEditReq = async () => {
     try {
+      setLoading(true)
       const { data } = await axios.put(`${backendUrl}/api/routine/editRoutine/${editRoutineId}`, {
         subject: editSubject,
         start: editStart,
@@ -108,6 +113,8 @@ const Routine = () => {
       }
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -198,10 +205,10 @@ const Routine = () => {
           />
         </div>
         <button
-          className='border border-purple-700 bg-purple-100 cursor-pointer flex items-center justify-center h-10 w-10 rounded-md text-purple-900 hover:shadow-xl'
+          className='border border-purple-700 bg-purple-100 cursor-pointer flex items-center justify-center h-10 w-full md:w-16 rounded-md text-purple-900 hover:shadow-xl'
           onClick={() => handleAddRoutine(selectedDay)}
         >
-          <Plus className='h-6 w-6 opacity-70' />
+          {loading ? "Adding.." : "Add"}
         </button>
       </div>
 
@@ -256,7 +263,7 @@ const Routine = () => {
                 <div className="flex items-center gap-4 mt-4 md:mt-0">
                   {editRoutineId === routine._id ? (
                     <>
-                      <button onClick={handleEditReq} className="bg-purple-900/70 text-white h-8 w-20 rounded-md">Save</button>
+                      <button onClick={handleEditReq} className="bg-purple-900/70 text-white h-8 w-20 rounded-md">{loading ? "Saving.." : "Save"}</button>
                       <button onClick={() => setEditRoutineId(null)} className="border border-purple-700 text-purple-900 h-8 w-20 rounded-md">Cancel</button>
                     </>
                   ) : (

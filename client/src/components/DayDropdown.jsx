@@ -8,8 +8,8 @@ export default function DayDropdown({ selectedDay, setSelectedDay }) {
   return (
     <div className="max-w-xs">
       <Listbox value={selectedDay} onChange={setSelectedDay}>
-        <div className="relative w-40">
-          <Listbox.Button className="relative w-full cursor-pointer rounded-md bg-gray-100 border border-purple-500 py-2 pl-3 pr-10 text-left text-purple-900 text-[1.04rem] shadow-sm focus:outline-none">
+        <div className="relative w-82 md:w-40 -ml-1">
+          <Listbox.Button className="relative w-full cursor-pointer rounded-md bg-gray-100 border border-purple-500 py-2 md:py-1.5 text-center md:text-left md:pl-5 text-purple-900 text-[1.04rem] shadow-sm focus:outline-none">
             <span className="block truncate">{selectedDay}</span>
             <span className="pointer-events-none absolute inset-y-0 right-2 flex items-center">
               <ChevronDown className="h-5 w-5 text-purple-700" />
