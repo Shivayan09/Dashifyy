@@ -18,8 +18,8 @@ const Contact = () => {
           Send email
         </button>
       </div>
-      <div className="box w-[100%] md:w-[57%] h-[40vh] md:h-screen flex items-center justify-center">
-        <img src={contact_us_icon3} alt="" className='opacity-80 h-[40vh] md:h-[70vh]' />
+      <div className="box w-[100%] md:w-[57%] h-[30vh] md:h-screen flex items-center justify-center">
+        <img src={contact_us_icon3} alt="" className='opacity-80 h-[30vh] md:h-[70vh]' />
       </div>
     </div>
   )

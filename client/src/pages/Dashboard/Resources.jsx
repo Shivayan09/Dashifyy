@@ -155,14 +155,14 @@ const Resources = () => {
                         <input
                             type="text"
                             placeholder="Heading"
-                            className="bg-purple-100 h-10 text-purple-900 w-[100%] md:w-[30%] outline-none p-5 rounded-md"
+                            className="bg-purple-100 h-10 text-purple-900 w-[100%] md:w-[29%] outline-none p-5 rounded-md"
                             value={heading}
                             onChange={(e) => setHeading(e.target.value)}
                         />
                         <input
                             type="url"
                             placeholder="YouTube URL"
-                            className="bg-purple-100 h-10 text-purple-900 w-[100%] md:w-[30%] outline-none p-5 rounded-md"
+                            className="bg-purple-100 h-10 text-purple-900 w-[100%] md:w-[29%] outline-none p-5 rounded-md"
                             value={url}
                             onChange={(e) => setUrl(e.target.value)}
                         />
@@ -176,9 +176,9 @@ const Resources = () => {
                     </div>
 
                     {ytLinks.length === 0 ? (
-                        <div className="h-[70vh] flex flex-col justify-center items-center">
+                        <div className="h-[50vh] md:h-[70vh] flex flex-col justify-center items-center">
                             <p className="text-gray-400">No YouTube links available.</p>
-                            <img src={no_data_icon2} alt="" className="h-[90%] opacity-90" />
+                            <img src={no_data_icon2} alt="" className="h-[60%] md:h-[90%] opacity-90" />
                         </div>
                     ) : (
                         <ul>

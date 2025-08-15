@@ -7,6 +7,7 @@ import { AppContext } from '../../context/AppContext';
 import delete_icon from '../../assets/delete-icon.png';
 import ConfirmDelete from '../../components/ConfirmDelete';
 import { useNavigate } from 'react-router-dom';
+import no_data_icon2 from '../../assets/no-data-icon2.jpg';
 
 const ToDo = () => {
   axios.defaults.withCredentials = true;
@@ -172,9 +173,12 @@ const ToDo = () => {
 
           <div className="info flex flex-col gap-2 overflow-y-auto mx-5 mt-2">
             {tasks.length === 0 ? (
-              <p className="text-center text-gray-400 text-[1.1rem] my-10">
+              <div>
+                <p className="text-center text-gray-400 text-[1.1rem] my-10">
                 No tasks added yet
               </p>
+              <img src={no_data_icon2} alt="" className="h-[60%] md:h-[90%] opacity-90" />
+              </div>
             ) : (
               tasks.map((task, index) => (
                 <div
