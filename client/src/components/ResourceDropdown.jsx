@@ -33,21 +33,16 @@ export default function ResourceDropdown({ selectedResource, setSelectedResource
                   key={resource.key}
                   value={resource.key}
                   className={({ active }) =>
-                    `relative cursor-pointer select-none py-2 pl-10 pr-4 text-[1.04rem] ${
+                    `relative cursor-pointer select-none py-2 text-[1.04rem] ${
                       active ? 'bg-purple-100 text-purple-900' : 'text-purple-900'
                     }`
                   }
                 >
                   {({ selected }) => (
                     <>
-                      <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
+                      <span className={`block truncate text-center ${selected ? 'font-medium' : 'font-normal'}`}>
                         {resource.label}
                       </span>
-                      {selected && (
-                        <span className="absolute left-2 inset-y-0 flex items-center text-purple-600">
-                          <Check className="h-4 w-4" />
-                        </span>
-                      )}
                     </>
                   )}
                 </Listbox.Option>

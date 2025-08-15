@@ -241,7 +241,7 @@ const Subjects = () => {
                     <>
                       <div className="add h-8 md:h-full w-32 flex items-center justify-center rounded-md relative z-10 bg-purple-100 text-purple-900 border border-purple-700 cursor-pointer transition-all duration-300 hover:scale-[1.01] hover:shadow-md text-[0.9rem]"
                       onClick={() => navigate(`/dashboard/subjects/${subject._id}/resources`)}>
-                        Resources
+                        See Resources
                       </div>
                       <Edit className='h-6 w-6 opacity-45 cursor-pointer' onClick={() => handleEdit(subject)} />
                       <div className="delete" onClick={() => openDeleteModal(subject._id)}>
