@@ -79,7 +79,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className='flex flex-col md:flex-row mt-10 md:mt-0 bg-purple-100 h-fit'>
+      <div className='flex flex-col md:flex-row pt-10 md:mt-0 bg-purple-100 h-fit'>
         <div className="box w-[100%] md:w-[50%] flex flex-col md:pl-16 justify-center gap-10">
           <div className="header flex items-center mx-auto md:mx-0 gap-7 w-[80%]">
             <p className='text-purple-900/80 font-bold text-[1.5rem] md:text-[2rem]'>Store</p>
